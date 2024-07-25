@@ -1,4 +1,4 @@
-import User from "../modules/user.model.js";
+import User from "../models/user.model.js";
 import bcrypt from 'bcryptjs';
 import getToken from "../utils/getToken.js"
 
@@ -17,14 +17,14 @@ export const signup = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const profilePic = `https://avatar.iran.liara.run/username?username=${username}`;
+        const profilepic = `https://avatar.iran.liara.run/username?username=${username}`;
 
         const newUser = new User({
             fullName,
             username,
             password: hashedPassword,
             gender,
-            profilePic: profilePic
+            profilepic: profilepic
         });
 
         if (newUser) {
@@ -35,7 +35,7 @@ export const signup = async (req, res) => {
                 _id: newUser._id,
                 fullName: newUser.fullName,
                 username: newUser.username,
-                profilepic: newUser.profilePic
+                profilepic: newUser.profilepic
             });
         }else{
         res.status(500).json({ message: "invalid user data" });
