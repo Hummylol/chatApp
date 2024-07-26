@@ -12,7 +12,7 @@ export const signup = async (req, res) => {
 
         const userExists = await User.findOne({ username });
         if (userExists) {
-            return res.status(400).json({ message: "Username already exists" });
+            return res.status(400).json({ error: "Username already exists" });
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -38,7 +38,7 @@ export const signup = async (req, res) => {
                 profilepic: newUser.profilepic
             });
         }else{
-        res.status(500).json({ message: "invalid user data" });
+        res.status(500).json({ error: "invalid user data" });
         }
 
     } catch (error) {

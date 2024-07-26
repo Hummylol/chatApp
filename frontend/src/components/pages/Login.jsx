@@ -1,18 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import useLogin from '../hooks/useLogin';
 
 const Signin = () => {
+	const [username,setUsername] = useState("");
+	const [password,setPassword] = useState("");
+	const { loading, login } = useLogin();
+	const handleSubmit=async (e)=>{
+		e.preventDefault();
+		await login(username,password);
+	}
   return (
     <div className='flex flex-col items-center justify-center w-96 h-screen mx-auto '>
       <div className="glass w-[100%] p-6 ">
         <h1 className='text-3xl font-semibold text-center text-white'>Login 
           <span className='text-3xl font-semibold text-center text-green-600'> Whatsup</span>
         </h1>
-        <form>
+        <form onSubmit={handleSubmit}>
 					<div>
 					<label className='label p-2 '>
 						<span className='text-base text-white label-text'>Username</span>
  						</label>
- 						<input type='text' placeholder='Enter username' className='w-full input input-bordered h-10' />
+ 						<input type='text' placeholder='Enter username' className='w-full input input-bordered h-10' 
+						value={username}
+						onChange={(e)=>setUsername(e.target.value)}
+						/>
  					</div>
 
  					<div>
@@ -23,14 +35,18 @@ const Signin = () => {
 							type='password'
 							placeholder='Enter Password'
 							className='w-full input input-bordered h-10'
+							value={password}
+							onChange={(e)=>setPassword(e.target.value)}
 						/>
 					</div>
-					<a href='#' className='text-sm text-white  hover:underline hover:text-blue-600 mt-2 inline-block'>
+					<Link to='/signup' className='text-sm text-white  hover:underline hover:text-blue-600 mt-2 inline-block'>
 						{"Don't"} have an account?
-					</a>
+					</Link>
 
 					<div>
-						<button className='btn btn-block btn-sm mt-2'>Login</button>
+					<button className='btn btn-block btn-sm mt-2' disabled={loading}>
+							{loading ? <span className='loading loading-spinner '></span> : "Login"}
+						</button>
 					</div>
 				</form>
 
