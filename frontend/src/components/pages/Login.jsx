@@ -14,7 +14,7 @@ const Signin = () => {
     <div className='flex flex-col items-center justify-center w-96 h-screen mx-auto '>
       <div className="glass w-[100%] p-6 ">
         <h1 className='text-3xl font-semibold text-center text-white'>Login 
-          <span className='text-3xl font-semibold text-center text-green-600'> Whatsup</span>
+          <span className='text-3xl font-semibold text-center text-black'> Whatsup</span>
         </h1>
         <form onSubmit={handleSubmit}>
 					<div>
